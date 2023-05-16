@@ -116,6 +116,65 @@ public class MensaTest {
   }
 
 
+  /**
+   * 
+   * Test for the Listavailableratingsforadish_ID562354 method.
+   * 
+   */
+  @Test
+  public void testListavailableratingsforadish_ID562354() {
+    MiniClientCoverage c = new MiniClientCoverage(mainPath);
+    c.setConnectorEndpoint(connector.getHttpEndpoint());
+    
+        
+    try {
+      c.setLogin(AnonymousAgentImpl.IDENTIFIER, "");
+      ClientResponse result = c.sendRequest("GET", "/dishes/{id}/ratings", """
+""", "text/plain", "*/*", new HashMap<>(), "1");
+      System.out.println("Result of request with id: 378227: " + result.getResponse().trim());
+    
+      Assert.assertEquals("[503756]", 200, result.getHttpCode());
+  Object response = JSONValue.parse(result.getResponse().trim());
+      // Response body has type JSON Array
+      assertThat("[823247]", response, isA(JSONArray.class));
+      
+      // Response body has field "stars" has type Number
+      assertThat("[826998]", response, both(isA(JSONObject.class)).and(asJSONObject(hasField("stars", isA(Number.class)))));
+      
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      fail("Exception: " + e);
+    }
+
+    
+  }
+  /**
+   * 
+   * Test for the GETdishesidratingsnotfoundtest_ID823764 method.
+   * 
+   */
+  @Test
+  public void testGETdishesidratingsnotfoundtest_ID823764() {
+    MiniClientCoverage c = new MiniClientCoverage(mainPath);
+    c.setConnectorEndpoint(connector.getHttpEndpoint());
+    
+        
+    try {
+      c.setLogin(AnonymousAgentImpl.IDENTIFIER, "");
+      ClientResponse result = c.sendRequest("GET", "/dishes/{id}/ratings", """
+""", "text/plain", "*/*", new HashMap<>(), "");
+      System.out.println("Result of request with id: 431597: " + result.getResponse().trim());
+    
+      Assert.assertEquals("[419118]", 404, result.getHttpCode());
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      fail("Exception: " + e);
+    }
+
+    
+  }
 
 
 
